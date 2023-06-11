@@ -151,6 +151,21 @@
             </button>
           </div>
         </div>
+
+        <div class="col containerInput">
+          <p class="title">
+            <span class="material-symbols-outlined" style="vertical-align: middle; font-size: 18px;">
+              payments
+            </span> 
+            Tipo de moneda de la cuenta: 
+          </p>
+          <div class="copy-link">
+            <input id="currenyTypeInput" type="text" class="copy-link-input" value="" readonly>
+            <button type="button" class="copy-link-button">
+              <span class="material-icons">content_copy</span>
+            </button>
+          </div>
+        </div>
         
         <div id="detailContainer" class="col containerInput">
           <p class="title">
@@ -191,10 +206,11 @@
         const bankName = urlParams.get('banco');
         const id = urlParams.get('ci');
         const nroAccount = urlParams.get('nroCuenta');
+        const currency = urlParams.get('moneda');
         const detail = urlParams.get('detalle') ?? null;
 
         
-        if(titleMotive === null){
+        if(titleMotive != null && titleMotive.trim() != ""){
           document.getElementById("TitleMotive").innerText  = titleMotive;
         }
         document.getElementById("titleInput").value  = fullName;
@@ -202,7 +218,13 @@
         document.getElementById("cedulaInput").value = id;
         document.getElementById("cuentaInput").value = nroAccount;
 
-        if (detail === null){
+        let curencyShow = "Guaranies"
+        if (currency != "gs") {
+          currencyShow = "Dólares";
+        }
+        document.getElementById("currenyTypeInput").value = curencyShow;
+
+        if (detail === null || detail === ''){
           document.getElementById("detailContainer").remove()
         }else{
           document.getElementById("detalleInput").value = detail;

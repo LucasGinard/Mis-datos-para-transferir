@@ -220,7 +220,7 @@
                         </div>
                         <div class="mb-3">
                             <h4>Tipo de moneda</h4>
-                            <div class="input-group"><input id="payment-method-card" type="radio" name="payment-method" value="card" checked="true" /><label for="payment-method-card"><span>Guaraníes</span></label><input id="payment-method-paypal" type="radio" name="payment-method" value="paypal" /><label for="payment-method-paypal"><span>Dólares</span></label></div>
+                            <div class="input-group"><input id="type-currency-gs" type="radio" name="type-curreny-account" value="gs" checked="true" /><label for="type-currency-gs"><span>Guaraníes</span></label><input id="type-currency-usd" type="radio" name="type-curreny-account" value="usd" /><label for="type-currency-usd"><span>Dólares</span></label></div>
                         </div>
                         <div class="mb-3">
                             <h4>Teminos y Condiciones</h4>
@@ -240,11 +240,21 @@
                         const cedula = document.getElementById("cedula").value;
                         const cuenta = document.getElementById("cuenta").value;
                         const detalle = document.getElementById("detalle").value;
-            
+
+                        const typeCurrencyAccountInputs = document.querySelectorAll('input[name="type-curreny-account"]');
+
+                        let selectedCurrency = '';
+
+                        typeCurrencyAccountInputs.forEach(input => {
+                            if (input.checked) {
+                                selectedCurrency = input.value;
+                            }
+                        });
+
                         if (!titular || !banco || !cedula || !cuenta) {
                             alert("Por favor, complete todos los campos obligatorios.");
                         } else {
-                            var setHref = "myData/myData.html?titulo="+titulo+"&titular="+ titular + "&banco="+banco + "&ci="+cedula + "&nroCuenta="+cuenta + "&detalle="+detalle;
+                            var setHref = "myData/myData.html?titulo="+titulo+"&titular="+ titular + "&banco="+banco + "&ci="+cedula + "&nroCuenta="+cuenta + "&moneda="+selectedCurrency+ "&detalle="+detalle ;
                             window.location.href = setHref;
                         }
                     });
