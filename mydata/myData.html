@@ -157,7 +157,7 @@
             <span class="material-symbols-outlined" style="vertical-align: middle; font-size: 18px;">
               payments
             </span> 
-            Tipo de moneda de la cuenta: 
+            Moneda de la cuenta: 
           </p>
           <div class="copy-link">
             <input id="currenyTypeInput" type="text" class="copy-link-input" value="" readonly>
@@ -218,11 +218,11 @@
         document.getElementById("cedulaInput").value = id;
         document.getElementById("cuentaInput").value = nroAccount;
 
-        let curencyShow = "Guaranies"
+        let currencyShow = "Guaranies"
         if (currency != "gs") {
           currencyShow = "Dólares";
         }
-        document.getElementById("currenyTypeInput").value = curencyShow;
+        document.getElementById("currenyTypeInput").value = currencyShow;
 
         if (detail === null || detail === ''){
           document.getElementById("detailContainer").remove()
