@@ -265,8 +265,17 @@
                             alert("Por favor, complete todos los campos obligatorios.");
                         } else {
                             termsError.style.display = "none";
-                            var setHref = "myData/myData.html?titulo="+titulo+"&titular="+ titular + "&banco="+banco + "&ci="+cedula + "&nroCuenta="+cuenta + "&moneda="+selectedCurrency+ "&detalle="+detalle ;
-                            window.location.href = setHref;
+                            var urlForm = "myData/myData.html?titular="+ titular + "&banco="+banco + "&ci="+cedula + "&nroCuenta="+cuenta + "&moneda="+selectedCurrency
+                            
+                            if(titulo != ""){
+                                urlForm = "myData/myData.html?titulo="+titulo+"&titular="+ titular + "&banco="+banco + "&ci="+cedula + "&nroCuenta="+cuenta + "&moneda="+selectedCurrency
+                            }
+
+                            if(detalle != ""){
+                                urlForm += "&detalle="+detalle
+                            }
+
+                            window.location.href = urlForm;
                         }
                     });
                 </script>
