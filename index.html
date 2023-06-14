@@ -223,8 +223,12 @@
                             <div class="input-group"><input id="type-currency-gs" type="radio" name="type-curreny-account" value="gs" checked="true" /><label for="type-currency-gs"><span>Guaraníes</span></label><input id="type-currency-usd" type="radio" name="type-curreny-account" value="usd" /><label for="type-currency-usd"><span>Dólares</span></label></div>
                         </div>
                         <div class="mb-3">
-                            <h4>Teminos y Condiciones</h4>
-                            <div class="input-group"><input id="terms" type="checkbox" /><label for="terms">Acepto los términos y condiciones para utilizar este servicio y confirmo que he leído la política de privacidad.</label></div>
+                            <h4>Términos y Condiciones</h4>
+                            <div class="input-group">
+                                <input id="terms-checkbox" type="checkbox" />
+                                <label for="terms-checkbox">Acepto los términos y condiciones para utilizar este servicio y confirmo que he leído la política de privacidad.</label>
+                            </div>
+                            <span id="terms-error" class="error-text"></span>
                         </div>
                         <div class="text-center">
                             <button type="submit" class="btn-solid-lg">Generar</button>
@@ -240,6 +244,8 @@
                         const cedula = document.getElementById("cedula").value;
                         const cuenta = document.getElementById("cuenta").value;
                         const detalle = document.getElementById("detalle").value;
+                        const termsCheckbox = document.getElementById("terms-checkbox");
+                        const termsError = document.getElementById("terms-error");
 
                         const typeCurrencyAccountInputs = document.querySelectorAll('input[name="type-curreny-account"]');
 
@@ -251,9 +257,14 @@
                             }
                         });
 
-                        if (!titular || !banco || !cedula || !cuenta) {
+                        if (!termsCheckbox.checked) {
+                            termsError.textContent = "Debes aceptar los términos y condiciones para utilizar este servicio.";
+                            termsError.style.display = "block";
+                            termsError.style.color = "red"
+                        }else if (!titular || !banco || !cedula || !cuenta) {
                             alert("Por favor, complete todos los campos obligatorios.");
                         } else {
+                            termsError.style.display = "none";
                             var setHref = "myData/myData.html?titulo="+titulo+"&titular="+ titular + "&banco="+banco + "&ci="+cedula + "&nroCuenta="+cuenta + "&moneda="+selectedCurrency+ "&detalle="+detalle ;
                             window.location.href = setHref;
                         }
