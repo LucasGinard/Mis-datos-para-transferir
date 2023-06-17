@@ -258,12 +258,12 @@
 
                     document.getElementById("formulario").addEventListener("submit", function(event) {
                         event.preventDefault();
-                        const titulo = document.getElementById("titulo").value;
-                        const titular = document.getElementById("titular").value;
-                        const banco = document.getElementById("banco").value;
-                        const cedula = document.getElementById("cedula").value;
-                        const cuenta = document.getElementById("cuenta").value;
-                        const detalle = document.getElementById("detalle").value;
+                        const titulo = encodeURIComponent(document.getElementById("titulo").value);
+                        const titular = encodeURIComponent(document.getElementById("titular").value);
+                        const banco = encodeURIComponent(document.getElementById("banco").value);
+                        const cedula = encodeURIComponent(document.getElementById("cedula").value);
+                        const cuenta = encodeURIComponent(document.getElementById("cuenta").value);
+                        const detalle = encodeURIComponent(document.getElementById("detalle").value);
                         const termsCheckbox = document.getElementById("terms-checkbox");
                         const termsError = document.getElementById("terms-error");
 
@@ -285,8 +285,8 @@
                             alert("Por favor, complete todos los campos obligatorios.");
                         } else {
                             termsError.style.display = "none";
-                            var urlForm = "https://misdatosparatransferir.com/myData/myData.html?titular="+ titular + "&banco="+banco + "&ci="+cedula + "&nroCuenta="+cuenta + "&moneda="+selectedCurrency
-                            
+                            var urlForm = "https://www.misdatosparatransferir.com/myData/myData.html?titular=" + titular + "&banco=" + banco + "&ci=" + cedula + "&nroCuenta=" + cuenta + "&moneda=" + selectedCurrency;
+
                             if(titulo != ""){
                                 urlForm += "&titulo="+titulo
                             }
@@ -294,6 +294,7 @@
                             if(detalle != ""){
                                 urlForm += "&detalle="+detalle
                             }
+
                             dialog.style.display = 'block';
                             document.getElementById("qrGenerate").innerHTML =''
                             var qrcode = new QRCode(document.getElementById("qrGenerate"), {
