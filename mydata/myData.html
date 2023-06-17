@@ -195,7 +195,6 @@
         </h5>
     </div>
 
-    <script src="js/qrcodeGenerator.js"></script>
     <script src="js/copyInput.js"></script>
     <script>
         const queryString = window.location.search;
@@ -228,17 +227,6 @@
           document.getElementById("detailContainer").remove()
         }else{
           document.getElementById("detalleInput").value = detail;
-        }
-        
-        if(document.getElementById("qrcode") != null){
-          var qrcode = new QRCode(document.getElementById("qrcode"), {
-            text: window.location.href,
-            width: 128,
-            height: 128,
-            colorDark : "#000000",
-            colorLight : "#ffffff",
-            correctLevel : QRCode.CorrectLevel.H
-          });
         }
     </script>
 </body>

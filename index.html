@@ -28,6 +28,7 @@
 	<link href="css/magnific-popup.css" rel="stylesheet">
 	<link href="css/styles.css" rel="stylesheet">
     <link href="css/styleTypeCurrency.css" rel="stylesheet">
+    <link href="css/styleDialogResult.css" rel="stylesheet">
 </head>
 <body data-spy="scroll" data-target=".fixed-top">
     
@@ -235,7 +236,26 @@
                         </div>
                     </form>
                 </div>
+
+                <div id="dialog" class="dialog">
+                    <div class="dialog-content">
+                      <h2>Diálogo</h2>
+                      <div id="qrGenerate" style="width: 200dp; height: 200dp;">
+
+                      </div>
+                      <p>Contenido del diálogo.</p>
+                      <button id="closeDialog">Cerrar</button>
+                    </div>
+                </div>
+                  
                 <script>
+                    const closeDialogButton = document.getElementById('closeDialog');
+                    const dialog = document.getElementById('dialog');
+
+                    closeDialogButton.addEventListener('click', function() {
+                        dialog.style.display = 'none';
+                    });
+
                     document.getElementById("formulario").addEventListener("submit", function(event) {
                         event.preventDefault();
                         const titulo = document.getElementById("titulo").value;
@@ -265,17 +285,25 @@
                             alert("Por favor, complete todos los campos obligatorios.");
                         } else {
                             termsError.style.display = "none";
-                            var urlForm = "myData/myData.html?titular="+ titular + "&banco="+banco + "&ci="+cedula + "&nroCuenta="+cuenta + "&moneda="+selectedCurrency
+                            var urlForm = "https://misdatosparatransferir.com/myData/myData.html?titular="+ titular + "&banco="+banco + "&ci="+cedula + "&nroCuenta="+cuenta + "&moneda="+selectedCurrency
                             
                             if(titulo != ""){
-                                urlForm = "myData/myData.html?titulo="+titulo+"&titular="+ titular + "&banco="+banco + "&ci="+cedula + "&nroCuenta="+cuenta + "&moneda="+selectedCurrency
+                                urlForm += "&titulo="+titulo
                             }
-
+                            
                             if(detalle != ""){
                                 urlForm += "&detalle="+detalle
                             }
-
-                            window.location.href = urlForm;
+                            dialog.style.display = 'block';
+                            document.getElementById("qrGenerate").innerHTML =''
+                            var qrcode = new QRCode(document.getElementById("qrGenerate"), {
+                                text: urlForm,
+                                width: 128,
+                                height: 128,
+                                colorDark : "#000000",
+                                colorLight : "#ffffff",
+                                correctLevel : QRCode.CorrectLevel.H
+                            });
                         }
                     });
                 </script>
@@ -284,6 +312,7 @@
     </div> <!-- end of lightbox-basic -->
     <!-- end of details lightbox -->
     <!-- end of description 1 details lightbox -->
+
     <footer>
         <div class="footer" style="text-align: center;">
             <div class="container">
@@ -304,6 +333,7 @@
     
     	
     <!-- Scripts -->
+    <script src="js/qrcodeGenerator.js"></script>
     <script src="js/jquery.min.js"></script> <!-- jQuery for Bootstrap's JavaScript plugins -->
     <script src="js/popper.min.js"></script> <!-- Popper tooltip library for Bootstrap -->
     <script src="js/bootstrap.min.js"></script> <!-- Bootstrap framework -->
