@@ -268,11 +268,13 @@
                         <h2>Diálogo</h2>
                         <div id="containerQR">
                             <div id="qrGenerate" style="width: 200dp; height: 200dp;"></div>
+                            <p>Contenido del diálogo.</p>
                         </div>
                         <a id="download-link"><i class="fas fa-download"></i> Descargar QR</a>
                         
                         <p>Contenido del diálogo.</p>
                         <button id="closeDialog">Cerrar</button>
+                        <button id="button-copy-form" class="btn-solid-lg">Copiar</button>
                     </div>
                 </div>
 
@@ -284,6 +286,7 @@
                         dialog.style.display = 'none';
                     });
 
+                    var urlForm = ""
                     document.getElementById("formulario").addEventListener("submit", function (event) {
                         event.preventDefault();
                         const titulo = encodeURIComponent(document.getElementById("titulo").value);
@@ -313,7 +316,7 @@
                             alert("Por favor, complete todos los campos obligatorios.");
                         } else {
                             termsError.style.display = "none";
-                            var urlForm = "https://www.misdatosparatransferir.com/myData/myData.html?titular=" + titular + "&banco=" + banco + "&ci=" + cedula + "&nroCuenta=" + cuenta + "&moneda=" + selectedCurrency;
+                            urlForm = "https://www.misdatosparatransferir.com/myData/myData.html?titular=" + titular + "&banco=" + banco + "&ci=" + cedula + "&nroCuenta=" + cuenta + "&moneda=" + selectedCurrency;
 
                             if (titulo != "") {
                                 urlForm += "&titulo=" + titulo
@@ -360,6 +363,12 @@
                                 }
                             });
                         });
+                    });
+
+                    const copyFormShare = document.getElementById("button-copy-form");
+                    copyFormShare.addEventListener("click", () => {
+                        console.log("funca -> "+ urlForm)
+                        navigator.clipboard.writeText(urlForm);
                     });
                 </script>
             </div>
