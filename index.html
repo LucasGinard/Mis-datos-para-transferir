@@ -99,7 +99,7 @@
                         <p class="p-large p-heading">Ningún dato sensible se guarda el proyecto es de codigo abierto
                             puedes verificar o colaborar <a style="color:#65a6eb" href="https://www.github.com"
                                 target="_blank">aqui</a> como funciona esta web, porfavor lea los: <a
-                                style="color:#65a6eb" href="terms-conditions.html">terminos y condiciones</a></p>
+                                style="color:#65a6eb" href="terms-conditions.html">términos y condiciones</a></p>
                     </div> <!-- end of text-container -->
                 </div> <!-- end of col -->
             </div> <!-- end of row -->
@@ -252,7 +252,7 @@
                             <h4>Términos y Condiciones</h4>
                             <div class="input-group">
                                 <input id="terms-checkbox" type="checkbox" />
-                                <label for="terms-checkbox">Acepto los términos y condiciones para utilizar este
+                                <label for="terms-checkbox">Acepto los <a style="color:#65a6eb" href="terms-conditions.html">términos y condiciones</a> para utilizar este
                                     servicio y confirmo que he leído la política de privacidad.</label>
                             </div>
                             <span id="terms-error" class="error-text"></span>
@@ -268,7 +268,7 @@
                         <h2>Diálogo</h2>
                         <div id="containerQR">
                             <div id="qrGenerate" style="width: 200dp; height: 200dp;"></div>
-                            <p>Contenido del diálogo.</p>
+                            <p id="dataGenerate"></p>
                         </div>
                         <a id="download-link"><i class="fas fa-download"></i> Descargar QR</a>
                         
@@ -326,6 +326,8 @@
                                 urlForm += "&detalle=" + detalle
                             }
 
+                            document.getElementById("dataGenerate").innerHTML = "<p> Titular: " + decodeURIComponent(titular) + "\n Banco: " + decodeURIComponent(banco)  + "\n C.I: " + decodeURIComponent(cedula)  + "\n Numero de Cuenta: " + decodeURIComponent(cuenta)  + "</p>";
+                            
                             dialog.style.display = 'block';
                             document.getElementById("qrGenerate").innerHTML = ''
 
