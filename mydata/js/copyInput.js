@@ -21,7 +21,7 @@ copyAllButton.addEventListener("click", () => {
     const titleElement = containerInput.querySelector(".title");
     const inputField = containerInput.querySelector(".copy-link-input");
 
-    const title = titleElement.textContent.trim();
+    const title = titleElement.childNodes[2].nodeValue.trim();
     const value = inputField.value;
 
     copiedText += `${title} ${value}\n`;
