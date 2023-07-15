@@ -2220,13 +2220,3 @@ a:hover.back-to-top {
 	font-weight: bold;
   }
 /* Form style*/
-
-
-/* QR dialog */
-	#containerQR{
-		align-items: center;
-		background-color: #f5f5f5;
-		color: black;
-		padding: 8px;
-	}
-/* QR dialog */

@@ -262,117 +262,23 @@
                         </div>
                     </form>
                 </div>
-
-                <div id="dialog" class="dialog">
-                    <div class="dialog-content">
-                        <h2>Diálogo</h2>
+            </div>
+            <div id="dialog" class="dialog">
+                <div class="dialog-content">
+                    <h2>Diálogo</h2>
+                    <div id="wrapper">
                         <div id="containerQR">
-                            <div id="qrGenerate" style="width: 200dp; height: 200dp;"></div>
-                            <p id="dataGenerate"></p>
+                          <div id="qrGenerate" style="width: 128dp; height: 200dp; text-align: -webkit-center;"></div>
+                          <p id="dataGenerate"></p>
                         </div>
-                        <a id="download-link"><i class="fas fa-download"></i> Descargar QR</a>
-                        
-                        <p>Contenido del diálogo.</p>
-                        <button id="closeDialog">Cerrar</button>
-                        <button id="button-copy-form" class="btn-solid-lg">Copiar</button>
-                    </div>
+                        <a id="download-link"><i class="fas fa-download"></i></a>
+
+                      </div>
+                    
+                    <p>Contenido del diálogo.</p>
+                    <button id="closeDialog">Cerrar</button>
+                    <button id="button-copy-form" class="btn-solid-lg">Copiar</button>
                 </div>
-
-                <script>
-                    const closeDialogButton = document.getElementById('closeDialog');
-                    const dialog = document.getElementById('dialog');
-
-                    closeDialogButton.addEventListener('click', function () {
-                        dialog.style.display = 'none';
-                    });
-
-                    var urlForm = ""
-                    document.getElementById("formulario").addEventListener("submit", function (event) {
-                        event.preventDefault();
-                        const titulo = encodeURIComponent(document.getElementById("titulo").value);
-                        const titular = encodeURIComponent(document.getElementById("titular").value);
-                        const banco = encodeURIComponent(document.getElementById("banco").value);
-                        const cedula = encodeURIComponent(document.getElementById("cedula").value);
-                        const cuenta = encodeURIComponent(document.getElementById("cuenta").value);
-                        const detalle = encodeURIComponent(document.getElementById("detalle").value);
-                        const termsCheckbox = document.getElementById("terms-checkbox");
-                        const termsError = document.getElementById("terms-error");
-
-                        const typeCurrencyAccountInputs = document.querySelectorAll('input[name="type-curreny-account"]');
-
-                        let selectedCurrency = '';
-
-                        typeCurrencyAccountInputs.forEach(input => {
-                            if (input.checked) {
-                                selectedCurrency = input.value;
-                            }
-                        });
-
-                        if (!termsCheckbox.checked) {
-                            termsError.textContent = "Debes aceptar los términos y condiciones para utilizar este servicio.";
-                            termsError.style.display = "block";
-                            termsError.style.color = "red"
-                        } else if (!titular || !banco || !cedula || !cuenta) {
-                            alert("Por favor, complete todos los campos obligatorios.");
-                        } else {
-                            termsError.style.display = "none";
-                            urlForm = "https://www.misdatosparatransferir.com/myData/myData.html?titular=" + titular + "&banco=" + banco + "&ci=" + cedula + "&nroCuenta=" + cuenta + "&moneda=" + selectedCurrency;
-
-                            if (titulo != "") {
-                                urlForm += "&titulo=" + titulo
-                            }
-
-                            if (detalle != "") {
-                                urlForm += "&detalle=" + detalle
-                            }
-
-                            document.getElementById("dataGenerate").innerHTML = "<p> Titular: " + decodeURIComponent(titular) + "\n Banco: " + decodeURIComponent(banco)  + "\n C.I: " + decodeURIComponent(cedula)  + "\n Numero de Cuenta: " + decodeURIComponent(cuenta)  + "</p>";
-                            
-                            dialog.style.display = 'block';
-                            document.getElementById("qrGenerate").innerHTML = ''
-
-                            const makeQR = (url, filename) => {
-                                var qrcode = new QRCode("qrGenerate", {
-                                    text: "",
-                                    width: 128,
-                                    height: 128,
-                                    colorDark: "#000000",
-                                    colorLight: "#ffffff",
-                                    correctLevel: QRCode.CorrectLevel.H
-                                });
-                                qrcode.makeCode(url);
-                            }
-
-                            makeQR(urlForm, 'qr-code.png')
-                        }
-                    });
-
-
-                    document.addEventListener('DOMContentLoaded', function () {
-                        var element = document.querySelector("#containerQR");
-                        var getCanvas;
-                        var newData;
-
-                        document.querySelector("#download-link").addEventListener('click', function () {
-                            html2canvas(element, {
-                                onrendered: function (canvas) {
-                                    getCanvas = canvas;
-                                    var imgageData = getCanvas.toDataURL("image/png");
-                                    var a = document.createElement("a");
-                                    a.href = imgageData;
-                                    a.download = "Image.png";
-                                    a.click();
-                                }
-                            });
-                        });
-                    });
-
-                    const copyFormShare = document.getElementById("button-copy-form");
-                    copyFormShare.addEventListener("click", () => {
-                        console.log("funca -> "+ urlForm)
-                        navigator.clipboard.writeText(urlForm);
-                    });
-                </script>
             </div>
         </div> <!-- end of row -->
     </div> <!-- end of lightbox-basic -->
@@ -414,6 +320,100 @@
     <script src="https://kit.fontawesome.com/bcbcc913f2.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/davidshimjs-qrcodejs@0.0.2/qrcode.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+    <script>
+        const closeDialogButton = document.getElementById('closeDialog');
+        const dialog = document.getElementById('dialog');
+
+        closeDialogButton.addEventListener('click', function () {
+            dialog.style.display = 'none';
+        });
+
+        var urlForm = ""
+        document.getElementById("formulario").addEventListener("submit", function (event) {
+            event.preventDefault();
+            const titulo = encodeURIComponent(document.getElementById("titulo").value);
+            const titular = encodeURIComponent(document.getElementById("titular").value);
+            const banco = encodeURIComponent(document.getElementById("banco").value);
+            const cedula = encodeURIComponent(document.getElementById("cedula").value);
+            const cuenta = encodeURIComponent(document.getElementById("cuenta").value);
+            const detalle = encodeURIComponent(document.getElementById("detalle").value);
+            const termsCheckbox = document.getElementById("terms-checkbox");
+            const termsError = document.getElementById("terms-error");
+
+            const typeCurrencyAccountInputs = document.querySelectorAll('input[name="type-curreny-account"]');
+
+            let selectedCurrency = '';
+
+            typeCurrencyAccountInputs.forEach(input => {
+                if (input.checked) {
+                    selectedCurrency = input.value;
+                }
+            });
+
+            if (!termsCheckbox.checked) {
+                termsError.textContent = "Debes aceptar los términos y condiciones para utilizar este servicio.";
+                termsError.style.display = "block";
+                termsError.style.color = "red"
+            } else if (!titular || !banco || !cedula || !cuenta) {
+                alert("Por favor, complete todos los campos obligatorios.");
+            } else {
+                termsError.style.display = "none";
+                urlForm = "https://www.misdatosparatransferir.com/myData/myData.html?titular=" + titular + "&banco=" + banco + "&ci=" + cedula + "&nroCuenta=" + cuenta + "&moneda=" + selectedCurrency;
+
+                if (titulo != "") {
+                    urlForm += "&titulo=" + titulo
+                }
+
+                if (detalle != "") {
+                    urlForm += "&detalle=" + detalle
+                }
+
+                document.getElementById("dataGenerate").innerHTML = "Titular: <b>" + decodeURIComponent(titular) + "</b><br> Banco: <b>" + decodeURIComponent(banco)  + "</b><br> C.I: <b>" + decodeURIComponent(cedula)  + "</b><br> N° de Cuenta: <b>" + decodeURIComponent(cuenta)  + "</b>";
+                
+                dialog.style.display = 'block';
+                document.getElementById("qrGenerate").innerHTML = ''
+
+                const makeQR = (url, filename) => {
+                    var qrcode = new QRCode("qrGenerate", {
+                        text: "",
+                        width: 128,
+                        height: 128,
+                        colorDark: "#000000",
+                        colorLight: "#ffffff",
+                        correctLevel: QRCode.CorrectLevel.H
+                    });
+                    qrcode.makeCode(url);
+                }
+
+                makeQR(urlForm, 'qr-code.png')
+            }
+        });
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var element = document.querySelector("#containerQR");
+            var getCanvas;
+            var newData;
+
+            document.querySelector("#download-link").addEventListener('click', function () {
+                html2canvas(element, {
+                    onrendered: function (canvas) {
+                        getCanvas = canvas;
+                        var imgageData = getCanvas.toDataURL("image/png");
+                        var a = document.createElement("a");
+                        a.href = imgageData;
+                        a.download = "Image.png";
+                        a.click();
+                    }
+                });
+            });
+        });
+
+        const copyFormShare = document.getElementById("button-copy-form");
+        copyFormShare.addEventListener("click", () => {
+            navigator.clipboard.writeText(urlForm);
+        });
+    </script>
 </body>
 
 </html>
