@@ -1,6 +1,7 @@
 document.querySelectorAll(".copy-link").forEach((copyLinkParent) => {
   const inputField = copyLinkParent.querySelector(".copy-link-input");
   const copyButton = copyLinkParent.querySelector(".copy-link-button");
+  const iconMaterial = copyButton.querySelector(".material-icons");
 
   inputField.addEventListener("focus", () => inputField.select());
 
@@ -9,6 +10,12 @@ document.querySelectorAll(".copy-link").forEach((copyLinkParent) => {
     inputField.select();
     inputField.setSelectionRange(0, 99999); // Para dispositivos móviles
     navigator.clipboard.writeText(text);
+    
+    iconMaterial.innerHTML = "done";
+    setTimeout(() => {
+      iconMaterial.innerHTML = "content_copy";
+    }, 1000);
+
   });
 });
 
