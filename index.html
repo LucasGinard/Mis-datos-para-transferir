@@ -280,7 +280,7 @@
                         <div class="copy-link">
                             <input id="linkGenerateInput" type="text" class="copy-link-input" value="" readonly="">
                             <button type="button" class="copy-link-button">
-                              <span class="material-icons" style="margin-top: 4px;">content_copy</span>
+                              <span id="iconCopySucess" class="material-icons" style="margin-top: 4px;">content_copy</span>
                             </button>
                         </div>
                         <button id="button-copy-form" class="btn-solid-lg">Copiar</button>
@@ -419,10 +419,16 @@
 
         const copyFormShare = document.getElementById("button-copy-form");
         const inputField = document.getElementById("linkGenerateInput");
+        const inputIconField = document.getElementById("iconCopySucess");
         copyFormShare.addEventListener("click", () => {
             inputField.select();
             inputField.setSelectionRange(0, 99999);
             navigator.clipboard.writeText(urlForm);
+
+            inputIconField.innerHTML = "done";
+            setTimeout(() => {
+                inputIconField.innerHTML = "content_copy";
+            }, 1000);
         });
     </script>
 </body>
