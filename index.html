@@ -32,6 +32,7 @@
     <link href="css/styles.css" rel="stylesheet">
     <link href="css/styleTypeCurrency.css" rel="stylesheet">
     <link href="css/styleDialogResult.css" rel="stylesheet">
+    <link href="mydata/css/styleCopyInput.css" rel="stylesheet">
 </head>
 
 <body data-spy="scroll" data-target=".fixed-top">
@@ -266,17 +267,23 @@
             <div id="dialog" class="dialog">
                 <div class="dialog-content">
                     <button id='closeDialog'>close</button>
-                    <h2>Diálogo</h2>
+                    <h3>Generado con éxito🎉</h3>
+                    <p>Puede descargar el QR con el icono <i style="color: #65a6eb;" class="fas fa-download"></i> o copiar el link con el botón <a style="color: #65a6eb;">Compartir</a></i></p>
                     <div id="wrapper">
                         <div id="containerQR">
                           <div id="qrGenerate" style="width: 128dp; height: 200dp; text-align: -webkit-center;"></div>
                           <p id="dataGenerate"></p>
                         </div>
                         <a id="download-link"><i class="fas fa-download"></i></a>
-                      </div>
-                    
-                    <p>Contenido del diálogo.</p>
-                    <button id="button-copy-form" class="btn-solid-lg">Copiar</button>
+                    </div>
+                    <div class="copy-link">
+                        <input id="linkGenerateInput" type="text" class="copy-link-input" value="" readonly="">
+                        <button type="button" class="copy-link-button">
+                          <span class="material-icons">content_copy</span>
+                        </button>
+                    </div>
+                    <button id="button-copy-form" class="btn-solid-lg">Compartir</button>
+                    <button class="btn-solid-lg">Ir al formulario</button>
                 </div>
             </div>
         </div> <!-- end of row -->
@@ -367,7 +374,8 @@
                 }
 
                 document.getElementById("dataGenerate").innerHTML = "Titular: <b>" + decodeURIComponent(titular) + "</b><br> Banco: <b>" + decodeURIComponent(banco)  + "</b><br> C.I: <b>" + decodeURIComponent(cedula)  + "</b><br> N° de Cuenta: <b>" + decodeURIComponent(cuenta)  + "</b>";
-                
+                document.getElementById("linkGenerateInput").value  = urlForm;
+
                 dialog.style.display = 'block';
                 document.getElementById("qrGenerate").innerHTML = ''
 
