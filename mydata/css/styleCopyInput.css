@@ -30,6 +30,7 @@
   }
 
   .copy-link {
+    width: -webkit-fill-available;
     margin: 10px;
     --height: 36px;
     display: flex;

@@ -31,7 +31,6 @@
   
   .dialog button {
     display: block;
-    margin-left: auto;
   }
 
   #wrapper {
@@ -66,6 +65,7 @@
 	}
 
   #closeDialog {
+    margin-left: auto;
     overflow: hidden;
     position: relative;
     border: none;
@@ -98,4 +98,10 @@
     }
     
     &:after { transform: rotate(-45deg); }
+  }
+
+  #dialogContainerButtonAndInput{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
   }

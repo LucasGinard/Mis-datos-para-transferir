@@ -268,7 +268,7 @@
                 <div class="dialog-content">
                     <button id='closeDialog'>close</button>
                     <h3>Generado con éxito🎉</h3>
-                    <p>Puede descargar el QR con el icono <i style="color: #65a6eb;" class="fas fa-download"></i> o copiar el link con el botón <a style="color: #65a6eb;">Compartir</a></i></p>
+                    <p>Puede descargar el QR con el icono <i style="color: #65a6eb;" class="fas fa-download"></i> o copiar el link con el botón <a style="color: #65a6eb;">Compartir</a></i> o <span style="color: #65a6eb;" class="material-icons">content_copy</span></p>
                     <div id="wrapper">
                         <div id="containerQR">
                           <div id="qrGenerate" style="width: 128dp; height: 200dp; text-align: -webkit-center;"></div>
@@ -276,14 +276,15 @@
                         </div>
                         <a id="download-link"><i class="fas fa-download"></i></a>
                     </div>
-                    <div class="copy-link">
-                        <input id="linkGenerateInput" type="text" class="copy-link-input" value="" readonly="">
-                        <button type="button" class="copy-link-button">
-                          <span class="material-icons">content_copy</span>
-                        </button>
+                    <div id="dialogContainerButtonAndInput">
+                        <div class="copy-link">
+                            <input id="linkGenerateInput" type="text" class="copy-link-input" value="" readonly="">
+                            <button type="button" class="copy-link-button">
+                              <span class="material-icons">content_copy</span>
+                            </button>
+                        </div>
+                        <button id="button-copy-form" class="btn-solid-lg">Compartir</button>
                     </div>
-                    <button id="button-copy-form" class="btn-solid-lg">Compartir</button>
-                    <button class="btn-solid-lg">Ir al formulario</button>
                 </div>
             </div>
         </div> <!-- end of row -->
@@ -325,6 +326,7 @@
     <script src="https://kit.fontawesome.com/bcbcc913f2.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/davidshimjs-qrcodejs@0.0.2/qrcode.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+    <script src="mydata/js/copyInput.js"></script>
     <script>
         const closeDialogButton = document.getElementById('closeDialog');
         const dialog = document.getElementById('dialog');
@@ -416,7 +418,10 @@
         });
 
         const copyFormShare = document.getElementById("button-copy-form");
+        const inputField = document.getElementById("linkGenerateInput");
         copyFormShare.addEventListener("click", () => {
+            inputField.select();
+            inputField.setSelectionRange(0, 99999);
             navigator.clipboard.writeText(urlForm);
         });
     </script>
