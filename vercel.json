@@ -1,8 +1,0 @@
-{
-    "routes": [
-      {
-        "src": "/myData/(.*)",
-        "dest": "/myData/$1"
-      }
-    ]
-  }
